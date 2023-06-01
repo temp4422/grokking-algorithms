@@ -1,4 +1,6 @@
 # Adapted for python3
+# Binary Search
+###############################################################################
 #my_list = [0,1,2,3,4,5,6,7,8,9]
 arrX = []
 for i in range(1, 101):
@@ -19,4 +21,24 @@ def binary_search(list, item):
 			low = mid + 1
 	return None
 
-print(binary_search(arrX, 100))
+# print(binary_search(arrX, 100))
+
+# Selection sort
+###############################################################################
+def findSmallest(arr):
+    smallest = arr[0]
+    smallest_index = 0
+    for i in range(1, len(arr)):
+        if arr[i] < smallest:
+            smallest = arr[i]
+            smallest_index = i
+    return smallest_index
+
+def selectionSort(arr):
+    newArr = []
+    for i in range(len(arr)):
+        smallest = findSmallest(arr)
+        newArr.append(arr.pop(smallest))
+    return newArr
+
+print(selectionSort([5, 3, 6, 2, 10]))
