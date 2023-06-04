@@ -2,9 +2,7 @@
 //*****************************************************************************
 // Variant 1 - myself, Variant 2 https://stackoverflow.com/a/42778677
 let arrX = []
-for (let i = 1; i < 101; i++) {
-  arrX.push(i)
-} // Arr with max number 4,294,967,295 ???
+for (let i = 1; i < 101; i++) arrX.push(i) // Arr with max number 4,294,967,295 ???
 let numX = 1 // Number to find
 
 function binarySearch(arrX, numX) {
@@ -40,38 +38,37 @@ function binarySearch(arrX, numX) {
 // Selection sort, O(n²)
 //*****************************************************************************
 // let arrY = [5, 1, 9, 3, 7, 6, 8, 4, 2, 10]
+// Create array of random digits
 let arrY = []
 while (arrY.length < 100) {
   let random = Math.round(Math.random() * 100)
-  if (!arrY.includes(random)) {
-    arrY.push(random)
-  }
-}
-
-let startTime = Date.now()
-
-function findSmallest(arr) {
-  smallest = arr[0]
-  smallestIndex = 0
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] < smallest) {
-      smallest = arr[i]
-      smallestIndex = i
-    }
-  }
-  return smallest
+  arrY.includes(random) ? null : arrY.push(random)
 }
 
 function selectionSort(arr) {
-  newArr = []
+  console.log(`Sorting: ${arr}`)
+  let newArr = []
+
+  function findSmallest(arr) {
+    let smallest = arr[0]
+    let smallestIndex = 0
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] < smallest) {
+        smallest = arr[i]
+        smallestIndex = i
+      }
+    }
+    return smallest
+  }
+
   // for loop from nth arr to arr of only 1 elemnt at index 0
   for (let i = 0; i <= arr.length; i++) {
     smallest = findSmallest(arr)
     newArr.push(smallest) // add element to newArr
-    arr.splice(arr.indexOf(smallest), 1) // remove 1 element on index
+    arr.splice(arr.indexOf(smallest), 1) // remove 1 element from old arr on index, thus only numbers that left should be sorted and pushed to newArr
     i = 0 // reset iterator, because length of arr changes on each iteration
   }
-  console.log(`Sorted arr: ${newArr} in ${Date.now() - startTime} ms`)
-  return newArr.length
+  console.log(`Sorted: ${newArr}`)
+  return
 }
 // selectionSort(arrY)
