@@ -45,6 +45,7 @@ while (arrY.length < 100) {
   arrY.includes(random) ? null : arrY.push(random)
 }
 
+// Sort array by creating new array and deleting items from initial array
 function selectionSort(arr) {
   console.log(`Sorting: ${arr}`)
   let newArr = []
@@ -70,5 +71,21 @@ function selectionSort(arr) {
   }
   console.log(`Sorted: ${newArr}`)
   return
+}
+// selectionSort(arrY)
+
+// Sort array in-place
+// https://dev.to/seanwelshbrown/implementing-a-selection-sort-algorithm-in-javascript-9of
+function selectionSort(array) {
+  for (let i = 0; i < array.length - 1; i++) {
+    let minIndex = i
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[j] < array[minIndex]) {
+        minIndex = j
+      }
+    }
+    ;[array[i], array[minIndex]] = [array[minIndex], array[i]]
+  }
+  return array
 }
 // selectionSort(arrY)
