@@ -118,3 +118,17 @@ function sum(arr) {
   }
 }
 // sum(arrX)
+
+function count(arr) {
+  if (arr.length == 1) {
+    return 1
+  } else {
+    arr.length-- // Decrement length of arr on each cycle
+    return count(arr) + count(arr) // Add array with length of 1 to array with length of 2, to length of 3, etc
+  }
+}
+// count(arrX)
+
+function max(arr) {
+
+}

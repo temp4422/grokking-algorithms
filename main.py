@@ -61,12 +61,39 @@ print(fact(3))
 
 # Divide and Conquer
 ###############################################################################
-arr = [2,4,6]
+list = [2,4,6]
 
-def sum(arr):
-  if len(arr) == 1:
-    return arr[0]
+# SUM
+# # My code
+# def sum(list):
+#   if len(list) == 1:
+#     return list[0]
+#   else:
+#     return list.pop() + sum(list)
+
+# # Book code
+# def sum(list):
+#   if list == []:
+#     return 0
+#   return list[0] + sum(list[1:])
+
+# # print(sum(list))
+
+# COUNT
+# My code
+def count(list):
+  if len(list) == 1:
+    return 1
   else:
-    return arr.pop() + sum(arr)
+    list.pop()
+    return count(list) + count(list)
 
-print(sum(arr))
+# Book code
+def count(list):
+  if list == []:
+    return 0
+  return 1 + count(list[1:])
+
+print(count(list))
+
+# MAX
