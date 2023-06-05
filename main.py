@@ -1,7 +1,8 @@
 # Adapted for python3
 # Binary Search
 ###############################################################################
-'''#my_list = [0,1,2,3,4,5,6,7,8,9]
+'''
+#my_list = [0,1,2,3,4,5,6,7,8,9]
 arrX = []
 for i in range(1, 101):
 	arrX.append(i)
@@ -26,7 +27,8 @@ def binary_search(list, item):
 
 # Selection sort
 ###############################################################################
-'''def findSmallest(arr):
+'''
+def findSmallest(arr):
     smallest = arr[0]
     smallest_index = 0
     for i in range(1, len(arr)):
@@ -47,6 +49,7 @@ def selectionSort(arr):
 
 # Recursion
 ###############################################################################
+'''
 def fact(x):
   if x == 1:
     return 1
@@ -54,3 +57,16 @@ def fact(x):
     return x * fact(x-1)
 
 print(fact(3))
+'''
+
+# Divide and Conquer
+###############################################################################
+arr = [2,4,6]
+
+def sum(arr):
+  if len(arr) == 1:
+    return arr[0]
+  else:
+    return arr.pop() + sum(arr)
+
+print(sum(arr))
