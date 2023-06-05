@@ -1,7 +1,7 @@
 # Adapted for python3
 # Binary Search
 ###############################################################################
-#my_list = [0,1,2,3,4,5,6,7,8,9]
+'''#my_list = [0,1,2,3,4,5,6,7,8,9]
 arrX = []
 for i in range(1, 101):
 	arrX.append(i)
@@ -22,10 +22,11 @@ def binary_search(list, item):
 	return None
 
 # print(binary_search(arrX, 100))
+'''
 
 # Selection sort
 ###############################################################################
-def findSmallest(arr):
+'''def findSmallest(arr):
     smallest = arr[0]
     smallest_index = 0
     for i in range(1, len(arr)):
@@ -41,4 +42,15 @@ def selectionSort(arr):
         newArr.append(arr.pop(smallest))
     return newArr
 
-print(selectionSort([5, 3, 6, 2, 10]))
+# print(selectionSort([5, 3, 6, 2, 10]))
+'''
+
+# Recursion
+###############################################################################
+def fact(x):
+  if x == 1:
+    return 1
+  else:
+    return x * fact(x-1)
+
+print(fact(3))
