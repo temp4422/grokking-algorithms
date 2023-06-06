@@ -123,12 +123,30 @@ function count(arr) {
   if (arr.length == 1) {
     return 1
   } else {
-    arr.length-- // Decrement length of arr on each cycle
-    return count(arr) + count(arr) // Add array with length of 1 to array with length of 2, to length of 3, etc
+    // Decrement array with each cycle
+    arr.length--
+    // Add array with length of 1 to array with length of 2, to length of 3, etc
+    return count(arr) + count(arr)
   }
 }
 // count(arrX)
 
 function max(arr) {
-
+  let maxVar = 0
+  function maxLocal(arr) {
+    if (arr.length == 0) {
+      return maxVar
+    } else {
+      if (maxVar < arr.at(-1)) maxVar = arr.at(-1)
+      arr.pop()
+      return maxLocal(arr)
+    }
+  }
+  maxLocal(arr)
+  return maxVar
 }
+// max(arrX)
+
+// TODO RECURSIVE BINARY SEARCH
+// Example https://646634.medium.com/how-to-write-a-recursive-binary-search-algorithm-in-javascript-ecadb5e51022
+function binarySearchRecursive(arr, num) {}
