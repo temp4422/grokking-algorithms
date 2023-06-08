@@ -166,3 +166,26 @@ function binarySearchRecursive(arr, num) {
   }
 }
 // binarySearchRecursive(arrX, numX)
+
+// Quicksort
+//*****************************************************************************
+// let arrX = [4, 2, 5, 8, 1, 3, 6]
+
+function quicksort(arr) {
+  if (arr.length < 2) return arr
+
+  let pivot = arr[0]
+  let less = []
+  let greater = []
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      less.push(arr[i])
+    } else if (arr[i] > pivot) {
+      greater.push(arr[i])
+    }
+  }
+
+  return [...quicksort(less), pivot, ...quicksort(greater)]
+}
+// console.log(quicksort(arrX))
