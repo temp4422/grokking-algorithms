@@ -108,7 +108,8 @@ function fact(x) {
 // base case sum(6)
 // recurisve: sum(2,4,6) -> 2 + sum(4,6) -> 4 + sum(6) -> sum(6)
 // Pop last (first) value from arr and add it to arr that remained, until only 1 element lefts in arr.
-let arrX = [2, 4, 6]
+
+// let arrX = [2, 4, 6]
 
 function sum(arr) {
   if (arr.length == 1) {
@@ -147,6 +148,21 @@ function max(arr) {
 }
 // max(arrX)
 
-// TODO RECURSIVE BINARY SEARCH
 // Example https://646634.medium.com/how-to-write-a-recursive-binary-search-algorithm-in-javascript-ecadb5e51022
-function binarySearchRecursive(arr, num) {}
+// let arrX = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+// let numX = 1
+
+function binarySearchRecursive(arr, num) {
+  let mid = Math.floor(arr.length / 2)
+  if (arr.length === 1 && arr[0] != num) {
+    return false
+  }
+  if (num === arr[mid]) {
+    return true
+  } else if (num < arr[mid]) {
+    return binarySearchRecursive(arr.slice(0, mid), num)
+  } else if (num > arr[mid]) {
+    return binarySearchRecursive(arr.slice(mid), num)
+  }
+}
+// binarySearchRecursive(arrX, numX)
