@@ -107,11 +107,12 @@ def max(list):
 
 # print(max(list))
 
+# RECURSIVE BINARY SEARCH
 '''
-# TODO RECURSIVE BINARY SEARCH
 
 # Quicsort
 ###############################################################################
+'''
 def quicksort(array):
   if len(array) < 2:
     return array # Base case: arrays with 0 or 1 element are already “sorted.”
@@ -122,3 +123,30 @@ def quicksort(array):
   return quicksort(less) + [pivot] + quicksort(greater)
 
 #print(quicksort([10, 5, 2, 3]))
+'''
+
+# Hash Tables
+###############################################################################
+'''
+# Preventing duplicate entries
+voted = {}
+def check_voter(name):
+  if voted.get(name):
+    print("kick them out!")
+  else:
+    voted[name] = True
+    print("let them vote!")
+
+#check_voter('tom')
+#check_voter('tom')
+
+# Caching
+cache = {}
+def get_page(url):
+  if cache.get(url):
+    return cache[url] # Returns cached data
+  else:
+    data = get_data_from_server(url)
+    cache[url] = data # Saves this data in your cache first
+    return data
+'''

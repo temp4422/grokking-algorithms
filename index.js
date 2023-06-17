@@ -1,5 +1,5 @@
 // Binary Search, O(log n)
-//*****************************************************************************
+/*****************************************************************************/
 // Variant 1 - myself, Variant 2 https://stackoverflow.com/a/42778677
 // let arrX = []
 // for (let i = 1; i < 101; i++) arrX.push(i) // Arr with max number 4,294,967,295 ???
@@ -36,7 +36,7 @@ function binarySearch(arrX, numX) {
 // binarySearch(arrX, numX)
 
 // Selection sort, O(n²)
-//*****************************************************************************
+/*****************************************************************************/
 // let arrY = [5, 1, 9, 3, 7, 6, 8, 4, 2, 10]
 // Create array of random digits
 // let arrY = []
@@ -91,7 +91,7 @@ function selectionSort(array) {
 // selectionSort(arrY)
 
 // Recursion
-//*****************************************************************************
+/*****************************************************************************/
 // Factorial x!
 function fact(x) {
   if (x == 1) {
@@ -103,7 +103,7 @@ function fact(x) {
 // fact(3)
 
 // Divide and Conquer
-//*****************************************************************************
+/*****************************************************************************/
 // For arr [2, 4, 6]
 // base case sum(6)
 // recurisve: sum(2,4,6) -> 2 + sum(4,6) -> 4 + sum(6) -> sum(6)
@@ -168,7 +168,7 @@ function binarySearchRecursive(arr, num) {
 // binarySearchRecursive(arrX, numX)
 
 // Quicksort
-//*****************************************************************************
+/*****************************************************************************/
 // let arrX = [4, 2, 5, 8, 1, 3, 6]
 
 function quicksort(arr) {
@@ -189,3 +189,21 @@ function quicksort(arr) {
   return [...quicksort(less), pivot, ...quicksort(greater)]
 }
 // console.log(quicksort(arrX))
+
+// Hash Tables
+/*****************************************************************************/
+async function getCache() {
+  // const fs = require('fs')
+  let cache = new Map()
+
+  if (cache.get('lorem') == undefined) {
+    console.log('Fetching data')
+    let data = await fetch(`https://dummyjson.com/products/1`).then((rawData) => rawData.json())
+    await cache.set('lorem', data)
+    // let cacheData = fs.readFileSync('/tmp/data.txt', 'utf8')
+  } else {
+    console.log(cache.get('lorem'))
+    // await fs.writeFileSync('/tmp/data.txt', JSON.stringify(data))
+  }
+}
+// getCache()
