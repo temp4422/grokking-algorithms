@@ -115,7 +115,7 @@ def max(list):
 '''
 def quicksort(array):
   if len(array) < 2:
-    return array # Base case: arrays with 0 or 1 element are already “sorted.”
+    return array # Base case: arrays with 0 or 1 element are already "sorted".
   else:
     pivot = array[0] # Recursive case
     less = [i for i in array[1:] if i <= pivot] # Sub-array of all the elements less than the pivot
@@ -149,4 +149,46 @@ def get_page(url):
     data = get_data_from_server(url)
     cache[url] = data # Saves this data in your cache first
     return data
+'''
+
+# Breadth-first search
+###############################################################################
+'''
+# Implement graph with hash tables
+graph = {}
+graph["you"] = ["alice", "bob", "claire"]
+graph["bob"] = ["anuj", "peggy"]
+graph["alice"] = ["peggy"]
+graph["claire"] = ["thom", "jonny"]
+graph["anuj"] = []
+graph["peggy"] = []
+graph["thom"] = []
+graph["jonny"] = []
+
+# Implement BFS on graph
+from collections import deque # python library has a queue function
+
+def is_seller(person):
+	return person[-1] == "m"
+
+def search(name):
+	# initialize queue
+	search_queue = deque()
+	search_queue += graph[name]
+	# keep track of people already searched
+	searched = []
+
+	# BFS
+	while search_queue:
+		person = search_queue.popleft() # (pop first item i.e. JS shift)
+		if not person in searched:
+			if is_seller(person):
+				print(person + " is a mango seller!")
+				return True
+			else:
+				search_queue += graph[person]
+				searched.append(person)
+	return False
+
+search("you")
 '''

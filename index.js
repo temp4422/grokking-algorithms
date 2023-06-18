@@ -207,3 +207,90 @@ async function getCache() {
   }
 }
 // getCache()
+
+// Breadth-first search
+/*****************************************************************************/
+// Implement graph with hash tables
+let graph = new Map()
+graph.set('you', ['alice', 'bob', 'claire'])
+graph.set('bob', ['anuj', 'peggy', 'you'])
+graph.set('alice', ['peggy'])
+graph.set('claire', ['thom', 'jonny'])
+graph.set('anuj', [])
+graph.set('peggy', [])
+graph.set('thom', [])
+graph.set('jonny', [])
+
+// Implement BFS on graph
+function bfs(name) {
+  let arr = graph.get(name)
+  let searched = []
+
+  for (let i = 0; i < arr.length; i++) {
+    // If searched doesn't includes current name
+    if (!searched.includes(arr[i])) {
+      // If last letter of current name ends with 'm' - we found mango seller
+      if (arr[i].at(-1) == 'm') {
+        return `Found: ${arr[i]}`
+      } else {
+        // Add name to searched items
+        searched.push(arr[i])
+        // Add neighbor nodes (friends of current name) to array with spread operator
+        arr.push(...graph.get(arr[i]))
+      }
+    }
+  }
+  return `NOT found!`
+}
+// console.log(bfs('you'))
+
+// Alternative https://dev.to/mattedwards/grokking-algorithms-in-javascript-part-2-213o
+// Representing the graph as a JavaScript Map() object
+const graph2 = new Map()
+graph2.set('you', [
+  { name: 'peter', job: 'bricklayer' },
+  { name: 'dimitrios', job: 'chef' },
+  { name: 'katie', job: 'architect' },
+])
+graph2.set('peter', [
+  { name: 'dean', job: 'solicitor' },
+  { name: 'aleksandra', job: 'doctor' },
+])
+graph2.set('dimitrios', [
+  { name: 'sam', job: 'heating engineer' },
+  { name: 'shefali', job: 'driving instructor' },
+])
+graph2.set('katie', [{ name: 'shefali', job: 'driving instructor' }])
+graph2.set('dean', [{ name: 'james', job: 'graphic designer' }])
+graph2.set('aleksandra', [])
+graph2.set('sam', [{ name: 'molly', job: 'software engineerr' }])
+graph2.set('shefali', [
+  { name: 'andrew', job: 'heating engineer' },
+  { name: 'amy', job: 'barrister' },
+])
+graph2.set('james', [])
+graph2.set('molly', [])
+graph2.set('andrew', [])
+graph2.set('amy', [])
+
+// BFS search
+function bfs2(name, job) {
+  let searchQueue = graph2.get(name)
+  const searched = []
+  while (searchQueue.length > 0) {
+    const person = searchQueue.shift()
+    if (!searched.includes(person)) {
+      if (person.job === job) {
+        console.log(`${person.name} is a ${job}`)
+        return true
+      } else {
+        searchQueue = searchQueue.concat(graph2.get(person.name))
+        searched.push(person)
+      }
+    }
+  }
+  console.log(`Nobody in your social network is a ${job}`)
+  return false
+}
+// bfs2('you', 'heating engineer') // "sam is a heating engineer"
+// bfs2('you', 'police officer') // "Nobody in your social network is a police officer"
