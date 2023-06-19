@@ -211,19 +211,19 @@ async function getCache() {
 // Breadth-first search
 /*****************************************************************************/
 // Implement graph with hash tables
-let graph = new Map()
-graph.set('you', ['alice', 'bob', 'claire'])
-graph.set('bob', ['anuj', 'peggy', 'you'])
-graph.set('alice', ['peggy'])
-graph.set('claire', ['thom', 'jonny'])
-graph.set('anuj', [])
-graph.set('peggy', [])
-graph.set('thom', [])
-graph.set('jonny', [])
+let graph1 = new Map()
+graph1.set('you', ['alice', 'bob', 'claire'])
+graph1.set('bob', ['anuj', 'peggy', 'you'])
+graph1.set('alice', ['peggy'])
+graph1.set('claire', ['thom', 'jonny'])
+graph1.set('anuj', [])
+graph1.set('peggy', [])
+graph1.set('thom', [])
+graph1.set('jonny', [])
 
 // Implement BFS on graph
 function bfs(name) {
-  let arr = graph.get(name)
+  let arr = graph1.get(name)
   let searched = []
 
   for (let i = 0; i < arr.length; i++) {
@@ -236,7 +236,7 @@ function bfs(name) {
         // Add name to searched items
         searched.push(arr[i])
         // Add neighbor nodes (friends of current name) to array with spread operator
-        arr.push(...graph.get(arr[i]))
+        arr.push(...graph1.get(arr[i]))
       }
     }
   }
@@ -294,3 +294,77 @@ function bfs2(name, job) {
 }
 // bfs2('you', 'heating engineer') // "sam is a heating engineer"
 // bfs2('you', 'police officer') // "Nobody in your social network is a police officer"
+
+// Dijkstra's algorithm
+/*****************************************************************************/
+// From https://dev.to/mattedwards/grokking-algorithms-in-javascript-part-3-11cf
+/*
+          A
+       /  |  \
+start     |     fin
+       \  |  /
+          B
+
+Hash tables x 3
+-------------------   -----------   ---------------
+|     Graph       |   |  Costs  |   |   Parents   |
+|-------+-----+---|   |-----+---|   |-----+-------|
+| start |  a  | 6 |   |  a  | 6 |   |  a  | start |
+|       |  b  | 2 |   |  b  | 2 |   |  b  | start |
+|  a    | fin | 1 |   | fin | ∞ |   | fin |  -    |
+|  b    | a   | 3 |   +-----+---+   +-----+-------+
+|       | fin | 5 |
+| fin   |    -    |
++-------+---------+
+*/
+// Init graph
+const graph = new Map()
+graph.set('start', new Map())
+graph.get('start').set('a', 6)
+graph.get('start').set('b', 2)
+graph.set('a', new Map())
+graph.get('a').set('fin', 1)
+graph.set('b', new Map())
+graph.get('b').set('a', 3)
+graph.get('b').set('fin', 5)
+graph.set('fin', new Map())
+// Init costs
+const costs = new Map()
+costs.set('a', 6)
+costs.set('b', 2)
+costs.set('fin', Number.POSITIVE_INFINITY)
+// Init parents
+const parents = new Map()
+parents.set('a', 'start')
+parents.set('b', 'start')
+parents.set('fin', null)
+// Init processed nodes
+const processed = []
+// Process the graph
+function findLowestCostNode(costs) {
+  lowestCost = Number.POSITIVE_INFINITY
+  lowestCostNode = null
+  costs.forEach((cost, node) => {
+    if (cost < lowestCost && !processed.includes(node)) {
+      lowestCost = cost
+      lowestCostNode = node
+    }
+  })
+  return lowestCostNode
+}
+let node = findLowestCostNode(costs)
+while (node) {
+  const nodeCost = costs.get(node)
+  const neighbours = graph.get(node)
+  neighbours.forEach((cost, neighbour) => {
+    newNodeCost = nodeCost + cost
+    if (costs.get(neighbour) > newNodeCost) {
+      costs.set(neighbour, newNodeCost)
+      parents.set(neighbour, node)
+    }
+  })
+  processed.push(node)
+  node = findLowestCostNode(costs)
+}
+// console.log(costs.get('fin')) // 6
+// console.log(parents)
