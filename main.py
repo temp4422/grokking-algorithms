@@ -277,3 +277,33 @@ while node is not None: # while there is a remaining node to be processed
 
 print (costs["fin"])
 '''
+
+# Greedy algorithm for set-covering problem
+###############################################################################
+# Init set of states to cover
+states_needed = set(["mt", "wa", "or", "id", "nv", "ut", "ca", "az"])
+
+# Init hash map of stations
+stations = {}
+stations["kone"] = set(["id", "nv", "ut"])
+stations["ktwo"] = set(["wa", "id", "mt"])
+stations["kthree"] = set(["or", "nv", "ca"])
+stations["kfour"] = set(["nv", "ut"])
+stations["kfive"] = set(["ca", "az"])
+
+# Init set of final stations
+final_stations = set()
+
+# Find the best station (covers most uncovered states)
+while states_needed: # Iterate until all states are covered
+	best_station = None
+	states_covered = set()
+	for station, states in stations.items(): # station = kfive; states = {'ca', 'az'}
+		covered = states_needed & states # set intersection
+		if len(covered) > len(states_covered):
+			best_station = station
+			states_covered = covered
+	states_needed -= states_covered
+	final_stations.add(best_station) # add the best station from each iteration to final set
+
+print(final_stations) # {'kfive', 'kthree', 'kone', 'ktwo'}

@@ -368,3 +368,50 @@ while (node) {
 }
 // console.log(costs.get('fin')) // 6
 // console.log(parents)
+
+// Greedy algorithm
+/*****************************************************************************/
+// From https://github.com/dtr200/grokking-algorithms/blob/main/greedy.js
+const statesNeeded = new Set(['mt', 'wa', 'or', 'id', 'nv', 'ut', 'ca', 'az']),
+  stations = {
+    kone: new Set(['id', 'nv', 'ut']),
+    ktwo: new Set(['wa', 'id', 'mt']),
+    kthree: new Set(['or', 'nv', 'ca']),
+    kfour: new Set(['nv', 'ut']),
+    kfive: new Set(['ca', 'az']),
+  }
+
+class Greedy {
+  constructor(states, stations) {
+    this.statesNeeded = states
+    this.stations = stations
+    this.finalStations = new Set()
+  }
+
+  calc() {
+    if (!(this.statesNeeded instanceof Set)) return
+    while (this.statesNeeded.size) {
+      /* bestStation - current best station, statesCovered - current best coverage */
+      let bestStation = null,
+        statesCovered = new Set()
+      for (let i in this.stations) {
+        /* Select covered states that are in the current this.stations[i] and this.statesNeeded */
+        const covered = new Set(
+          [...this.stations[i]].filter((i) => [...this.statesNeeded].includes(i))
+        )
+        /* If the list of collected states is larger than what was previously in statesCovered, then the current station is better. I save */
+        if (covered.size > statesCovered.size) {
+          bestStation = i
+          this.stations[i].forEach((el) => statesCovered.add(el))
+        }
+      }
+      /* Add this station to the list */
+      this.finalStations.add(bestStation)
+      /* Remove the processed states from the list this.statesNeeded */
+      statesCovered.forEach((i) => this.statesNeeded.delete(i))
+    }
+    return this.finalStations
+  }
+}
+// const check = new Greedy(statesNeeded, stations)
+// console.log(check.calc())
